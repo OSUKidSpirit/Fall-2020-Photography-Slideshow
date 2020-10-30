@@ -1,0 +1,146 @@
+<style>
+  #anthonian-slideshow-display {
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
+
+  .anthonian-image-display {
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #anthonian-slideshow-gallery {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+  }
+
+  .grid-item {
+    width: 100%;
+    margin: auto;
+    padding: 1%;
+  }
+
+  /* Slide Animation */
+  .slide {
+    -webkit-animation-name: slide;
+    -webkit-animation-duration: 5s;
+    animation-name: slide;
+    animation-duration: 5s;
+  }
+
+  @-webkit-keyframes slide {
+    from {background-position: center;} 
+    to {background-position: middle -100%;}
+  }
+
+  @keyframes slide {
+    from {background-position: center;} 
+    to {background-position: middle -100%;}
+  }
+</style>
+
+<div class="anthonian-container">
+  <div class="anthonian-slideshow">
+    <div class="slide" id="anthonian-slideshow-display">
+      <!-- Slideshow Display -->
+    </div>
+    <div id="anthonian-slideshow-gallery">
+      <!-- Slideshow Gallery -->
+    </div>
+  </div>
+</div>
+
+<script>
+  /**************************
+   * Container Resizer      *
+   * Date: October 30, 2020 *
+   * Author: Anthony Kung   *
+   * Author URI: anth.dev   *
+   * ************************/
+  var anthonianSlideDisplay = document.getElementById("anthonian-slideshow-display");
+  var kidspiritAspectRatio = 1365 / 2048;
+  var currentSlideNum = 0;
+  var animationNum = 0;
+
+  // Resize display
+  window.addEventListener("load", anthonianDisplaySizer);
+  window.addEventListener("resize", anthonianDisplaySizer);
+  function anthonianDisplaySizer() {
+    var width = anthonianSlideDisplay.offsetWidth;
+    anthonianSlideDisplay.style.height = (width * kidspiritAspectRatio) + "px";
+  }
+
+  /**************************
+   * Slideshow              *
+   * Date: October 30, 2020 *
+   * Author: Anthony Kung   *
+   * Author URI: anth.dev   *
+   * ************************/
+
+  var kidspiritImages = [
+    {
+      "link": "https://kidspirit.oregonstate.edu/sites/kidspirit.oregonstate.edu/files/_mg_7169.jpg"
+    },
+    {
+      "link": "https://kidspirit.oregonstate.edu/sites/kidspirit.oregonstate.edu/files/photography_bw_2.jpg"
+    },
+    {
+      "link": "https://kidspirit.oregonstate.edu/sites/kidspirit.oregonstate.edu/files/photography_grass_origami.png"
+    }
+  ];
+
+  function anthonainSlideshow() {
+    console.log("Slideshow Called");
+    console.log("currentSlideNum", currentSlideNum);
+    if (currentSlideNum < kidspiritImages.length) {
+      anthonianSlideDisplay.style.backgroundImage = "url('" + kidspiritImages[currentSlideNum].link + "')";
+      currentSlideNum++;
+      console.log("Slideshow Set");
+    }
+    else {
+      currentSlideNum = 0;
+      anthonainSlideshow();
+    }
+  }
+
+  anthonainSlideshow();
+  setInterval(anthonainSlideshow, 5000);
+
+  
+
+   /****************************
+   * Slideshow Gallery Onclick *
+   * Date: October 30, 2020    *
+   * Author: Anthony Kung      *
+   * Author URI: anth.dev      *
+   * ***************************/
+
+   function anthonianGalleryOnclick() {
+     var str = this.style.backgroundImage;
+     var link = 
+   }
+
+  /**************************
+   * Slideshow Gallery      *
+   * Date: October 30, 2020 *
+   * Author: Anthony Kung   *
+   * Author URI: anth.dev   *
+   * ************************/
+
+   var anthonainSlideshowGallery = document.getElementById('anthonian-slideshow-gallery');
+
+   for (var i = 0; i < kidspiritImages.length; i++) {
+    var image = document.createElement("div");
+    image.style.backgroundImage = "url('" + kidspiritImages[i].link + "')";
+    image.classList.add("grid-item");
+    image.classList.add("anthonian-image-display");
+    anthonainSlideshowGallery.appendChild(image);
+    image.style.height = "200px";
+   }
+</script>
